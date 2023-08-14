@@ -20,28 +20,25 @@ function dataProcessor (event) {
     userDataArray.push(userEntryTwo);
     userDataArray.push(userEntryThree);
 
-    console.log("Current array: " + userDataArray);
-    console.log("2nd thing " + userDataArray[1]);
-    console.log("1st thing " + userDataArray[0]);
-    console.log("3rd thing " + userDataArray[2]);
+    // Uppercase entire array, and store in a new array.
+    const userDataArrayUpperCased = [];
 
-    const newArray = [];
-    newArray.push(userDataArray[1], userDataArray[0], userDataArray[2]);
-    console.log(newArray);
+    userDataArray.forEach(function(element) {
+        userDataArrayUpperCased.push(element.toUpperCase());
+    });
+
+    // Sort new array, and store in yet, another array.
+    const userDataArrayUpperCasedAndSorted = userDataArrayUpperCased.sort();
 
     const ulElement = document.createElement("ul");
-    const liElementOne = document.createElement("li");
-    const liElementTwo = document.createElement("li");
-    const liElementThree = document.createElement("li");
-
+    let userForm = document.querySelector("#user-form");
     userForm.after(ulElement);
-    ulElement.prepend(liElementOne);
-    liElementOne.after(liElementTwo);
-    ulElement.append(liElementThree);
 
-    liElementOne.append(newArray[0]);
-    liElementTwo.append(newArray[1]);
-    liElementThree.append(newArray[2]);
-    console.log(newArray);
+    userDataArrayUpperCasedAndSorted.forEach(function(listItem){
+        const liElement = document.createElement("li");
+        ulElement.append(liElement);
+        liElement.append(listItem);
+    });
 
+    userForm.remove();
 }
